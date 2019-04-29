@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Compass</string>
+    <string name="app_name">Crails</string>
 
     <string name="action_settings">Settings</string>
 
@@ -13,6 +13,18 @@
     <string name="sotw_northeast">NE</string>
     <string name="sotw_northwest">NW</string>
     <string name="sotw_southeast">SE</string>
+    <string name="dot_in_spot">Dot in a Spot</string>
+    <string name="start_stop">Start/Stop</string>
+    <string name="title_activity_show_coord">ShowCoordActivity</string>
+    <string name="print_trail">Print Trail</string>
+    <string name="view_trail">View Trail</string>
+    <string name="create_trail">Create Trail</string>
+    <string name="title_activity_create_trail">CreateTrail</string>
+    <string name="start_recording">Start</string>
+    <string name="stop_recording">Stop</string>
+    <string name="title_activity_view_trail">ViewTrail</string>
+    <string name="search_for_trails">Search for Trails</string>
+    <string name="appbar_scrolling_view_behavior">scrolling view behavior</string>
     <string name="sotw_southwest">SW</string>
 
 </resources>
