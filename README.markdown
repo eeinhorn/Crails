@@ -1,3 +1,5 @@
+SHAMELESS CLONE OF A DIFFERENT COMPASS ANDROID APP. INSTEAD OF POINTING NORTH, THIS SHOULD POINT TO THE NEXT PLACE YOU SHOULD GO!
+
 Compass is a sample android application which implements trivial compass functionality.
 It was created just as a code snippet reuse in some of my projects.
 
