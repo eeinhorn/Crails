@@ -1,6 +1,8 @@
 package com.sevencrayons.compass;
 
 import android.app.Activity;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -8,12 +10,18 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.google.gson.Gson;
+
 
 
 public class CompassActivity extends AppCompatActivity {
 
     private static final String TAG = "CompassActivity";
 
+    private Location myLoc;
+    private Location destLoc;
+    private double distance;
+    private double closeEnough = 1.5;
     private Compass compass;
     private ImageView arrowView;
     private TextView sotwLabel;  // SOTW is for "side of the world"
@@ -101,4 +109,33 @@ public class CompassActivity extends AppCompatActivity {
             }
         };
     }
+
+    LocationListener locationListener = new LocationListener() {
+        public void onLocationChanged(Location location) {
+            // Called when a new location is found by the network location provider.
+            //makeUseOfNewLocation(location);
+            Log.i("loc:", "lat: " + location.getLatitude() + " long: " + location.getLongitude() + "alt: " + location.getAltitude() + "acc: " + location.getAccuracy());
+            myLoc = location;
+            distance = Math.hypot(myLoc.getLatitude() - destLoc.getLatitude(), myLoc.getLongitude() - destLoc.getLongitude()) * (1.0 / 78710.0);
+            if (distance < closeEnough) {
+                Log.i("ayy", "you made it to the node!");
+            }
+        }
+
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
 }
