@@ -27,6 +27,7 @@ public class Compass implements SensorEventListener {
     private float azimuth;
     private float azimuthFix;
 
+
     public Compass(Context context) {
         sensorManager = (SensorManager) context
                 .getSystemService(Context.SENSOR_SERVICE);
@@ -96,7 +97,7 @@ public class Compass implements SensorEventListener {
                 SensorManager.getOrientation(R, orientation);
                 // Log.d(TAG, "azimuth (rad): " + azimuth);
                 azimuth = (float) Math.toDegrees(orientation[0]);
-                //H
+
                 azimuth = (azimuth + azimuthFix + 360) % 360;
                 // Log.d(TAG, "azimuth (deg): " + azimuth);
                 //TODO: convert to new better azimuth
