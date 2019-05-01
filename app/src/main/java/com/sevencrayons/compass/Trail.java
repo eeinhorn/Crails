@@ -1,5 +1,7 @@
 package com.sevencrayons.compass;
 
+import android.location.Location;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -7,8 +9,8 @@ public class Trail {
 
     public ArrayList<Node> points = new ArrayList<Node>();
 
-    public void addNode(double lon, double lat, double alt) {
-        Node n = new Node(lon, lat, alt);
+    public void addNode(Location location) {
+        Node n = new Node(location);
         points.add(n);
     }
 
@@ -32,9 +34,7 @@ public class Trail {
         Node n;
         for(int i=0; i<points.size(); i++) {
             n = points.get(i);
-            str += "lat"+i+": "+n.latitude+"\n";
-            str += "long"+i+": "+n.longitude+"\n";
-            str += "alt"+i+": "+n.altitude+"\n";
+            str += "loc" + i + ": " + n.location.toString() + "\n";
         }
         return str;
     }
@@ -43,16 +43,12 @@ public class Trail {
     public static class Node {
 
         Timestamp time;
-        double longitude;
-        double latitude;
-        double altitude;
+        Location location;
         boolean flagged;
         String message;
 
-        public Node(double lon, double lat, double alt) {
-            this.longitude = lon;
-            this.latitude = lat;
-            this.altitude = alt;
+        public Node(Location loc) {
+            location = loc;
             flagged = false;
             time = new Timestamp(System.currentTimeMillis());
             message = "";

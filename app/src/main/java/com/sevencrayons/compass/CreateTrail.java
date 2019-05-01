@@ -64,7 +64,7 @@ public class CreateTrail extends AppCompatActivity{
                 // Called when a new location is found by the network location provider.
                 //makeUseOfNewLocation(location);
                 if (isRecording)
-                    trail.addNode(location.getLongitude(), location.getLatitude(), location.getAltitude());
+                    trail.addNode(location);
                 else
                     printTrail.setText(trail.toString());
                 xText.setText("X: " + Double.toString(location.getLatitude()));
