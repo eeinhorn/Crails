@@ -31,6 +31,7 @@ public class CompassActivity extends AppCompatActivity {
 
     private Location myLoc;
     private Location destLoc = new Location(GPS_PROVIDER);
+    private float direction;
 
     private Gson trailGson = new Gson();
     Trail trail = new Trail();
@@ -110,7 +111,7 @@ public class CompassActivity extends AppCompatActivity {
         Animation an = new RotateAnimation(-currentAzimuth, -azimuth,
                 Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
                 0.5f);
-        currentAzimuth = azimuth;
+        currentAzimuth = direction; //changed azimuth to trailNorth
 
         an.setDuration(500);
         an.setRepeatCount(0);
@@ -136,7 +137,7 @@ public class CompassActivity extends AppCompatActivity {
                 if (bearTo < 0){
                     bearTo = bearTo + 360;
                 }
-                float direction = bearTo-trailNorth + 90;
+                direction = bearTo-trailNorth + 90; //put back as what it was
                 if (direction < 0){
                     direction = direction + 360;
                 }
@@ -148,7 +149,7 @@ public class CompassActivity extends AppCompatActivity {
                     @Override
                     //trailNorth = myLoc.bearTo()
                     public void run() {
-                        adjustArrow(irlDirection);
+                        adjustArrow(irlDirection );//tried +azimuth
                     }
                 });
             }
