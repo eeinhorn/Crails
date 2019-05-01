@@ -113,7 +113,7 @@ public class CreateTrail extends AppCompatActivity{
         isRecording = false;
         stop.setEnabled(false);
         start.setEnabled(true);
-        String trailName = trail.toString();
+        String trailName = "trail";
         trailName = trailName.replace("\n", "");
         trailName = trailName.replace(".", "");
         Log.d("name", trailName);
