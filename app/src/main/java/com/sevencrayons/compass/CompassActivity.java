@@ -30,7 +30,7 @@ public class CompassActivity extends AppCompatActivity {
     private static final String TAG = "CompassActivity";
 
     private Location myLoc;
-    private Location destLoc = new Location(GPS_PROVIDER);
+    private Location[] destLoc = new Location[4]; //Location(GPS_PROVIDER);
 
     private Gson trailGson = new Gson();
     Trail trail = new Trail();
@@ -52,8 +52,14 @@ public class CompassActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        destLoc.setLatitude(40.596968);
-        destLoc.setLongitude(-75.510654);
+        destLoc[0].setLatitude(40.5969466);
+        destLoc[0].setLongitude(-75.5111066);
+        destLoc[1].setLatitude(40.5973468);
+        destLoc[1].setLongitude(-75.5106908);
+        destLoc[2].setLatitude(40.5974789);
+        destLoc[2].setLongitude(-75.5100789);
+        destLoc[3].setLatitdue(40.5976914);
+        destLoc[3].setLongitude(-75.5099043);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compass);
 
