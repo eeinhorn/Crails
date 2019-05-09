@@ -1,5 +1,10 @@
 package com.sevencrayons.compass;
 
+/*
+    Compass class that reads from phone sensors
+    and adjusts variables accordingly
+*/
+
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -93,11 +98,10 @@ public class Compass implements SensorEventListener {
             boolean success = SensorManager.getRotationMatrix(R, I, mGravity,
                     mGeomagnetic);
             if (success) {
-                float orientation[] = new float[3];
+                float[] orientation = new float[3];
                 SensorManager.getOrientation(R, orientation);
                 // Log.d(TAG, "azimuth (rad): " + azimuth);
                 azimuth = (float) Math.toDegrees(orientation[0]);
-
                 azimuth = (azimuth + azimuthFix + 360) % 360;
                 // Log.d(TAG, "azimuth (deg): " + azimuth);
                 //TODO: convert to new better azimuth

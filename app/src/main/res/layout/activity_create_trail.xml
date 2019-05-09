@@ -30,19 +30,18 @@
         android:id="@+id/ButtonStart"
         style="@android:style/Widget.Button"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="55dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="95dp"
-        android:layout_marginBottom="365dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="180dp"
         android:onClick="startRecording"
         android:text="@string/start_recording"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/ButtonStop"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/xText"
+        app:layout_constraintTop_toBottomOf="@+id/yText"
         tools:text="@string/start_recording" />
 
     <Button
@@ -52,24 +51,26 @@
         android:layout_height="60dp"
         android:layout_below="@+id/ButtonStart"
         android:layout_alignParentStart="true"
-        android:layout_marginEnd="62dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginEnd="1dp"
         android:onClick="stopRecording"
         android:text="@string/stop_recording"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-        app:layout_constraintBaseline_toBaselineOf="@+id/ButtonStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ButtonStart"
+        app:layout_constraintTop_toBottomOf="@+id/yText"
         tools:text="@string/stop_recording" />
 
     <TextView
         android:id="@+id/xText"
         android:layout_width="157dp"
-        android:layout_height="0dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="84dp"
-        android:layout_marginBottom="190dp"
+        android:layout_marginEnd="68dp"
         android:text="X:"
-        app:layout_constraintBottom_toTopOf="@+id/ButtonStart"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.652"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="x: " />
@@ -77,13 +78,18 @@
     <TextView
         android:id="@+id/yText"
         android:layout_width="152dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="483dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:text="Y:"
-        app:layout_constraintBottom_toTopOf="@+id/print_trail"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/xText"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.261"
         tools:text="Y:" />
 
     <TextView
@@ -91,11 +97,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ButtonStop"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/print_trail"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yText"
         tools:text="@string/print_trail" />
 
 </android.support.constraint.ConstraintLayout>

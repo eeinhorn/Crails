@@ -1,5 +1,11 @@
 package com.sevencrayons.compass;
 
+/*
+    This activity allows a user to create a new trail
+    by implementing buttons that trigger recording of the
+    user's GPS path.
+*/
+
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -17,6 +23,8 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -66,7 +74,7 @@ public class CreateTrail extends AppCompatActivity{
                 if (isRecording)
                     trail.addNode(location);
                 else
-                    printTrail.setText(trail.toString());
+                    //printTrail.setText(trail.toString());
                 xText.setText("X: " + Double.toString(location.getLatitude()));
                 yText.setText("Y: " + Double.toString(location.getLongitude()));
                 Log.i("loc:", "lat: " + location.getLatitude() +" long: " + location.getLongitude() + "alt: " + location.getAltitude() + "acc: " +location.getAccuracy());
@@ -118,6 +126,14 @@ public class CreateTrail extends AppCompatActivity{
         trailName = trailName.replace(".", "");
         Log.d("name", trailName);
         Gson trailgson = new Gson();
-        trailgson.toJson(trail, new FileWriter("values/"+trailName + ".json"));
+        //trailgson.toJson(trail, new FileWriter("values/"+trailName + ".json"));
+        String trailjson = trailgson.toJson(trail);
+        File trailfile = new File(this.getFilesDir()+ "/" + trailName+".json");
+        if (!trailfile.exists())
+            trailfile.createNewFile();
+        BufferedWriter bw = new BufferedWriter(new FileWriter(trailfile));
+        bw.write(trailjson);
+        bw.close();
+        Log.d("r", "trail first loc:" + trail.getNode(0)) ;
     }
 }

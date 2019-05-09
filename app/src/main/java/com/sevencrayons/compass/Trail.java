@@ -59,7 +59,6 @@ public class Trail {
             this.message = message;
         }
 
-
         public boolean isFlagged() {
             return this.flagged;
         }

@@ -6,4 +6,39 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/button5"
+        style="@android:style/Widget.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="50dp"
+        android:onClick="openCreateTrail"
+        android:text="@string/create_trail"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        app:layout_constraintBaseline_toBaselineOf="@+id/button6"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="@string/create_trail" />
+
+    <Button
+        android:id="@+id/button6"
+        style="@android:style/Widget.Button"
+        android:layout_width="114dp"
+        android:layout_height="48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="216dp"
+        android:layout_marginTop="136dp"
+        android:layout_marginEnd="8dp"
+        android:layout_toEndOf="@+id/button5"
+        android:onClick="openViewTrail"
+        android:text="@string/view_trail"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.652"
+        app:layout_constraintStart_toStartOf="@+id/button5"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/view_trail" />
+
 </android.support.constraint.ConstraintLayout>
