@@ -1,5 +1,11 @@
 package com.sevencrayons.compass;
 
+/*
+    This class creates a Trail by creating an ArrayList
+    of Nodes. Each node contains location data for that
+    particular point in the trail.
+*/
+
 import android.location.Location;
 
 import java.sql.Timestamp;

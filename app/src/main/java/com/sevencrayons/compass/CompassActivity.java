@@ -22,8 +22,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.google.gson.Gson;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import static android.location.LocationManager.GPS_PROVIDER;
 
+//This file loads a trail from a json, sets up location permissions, places a compass that points
+//where we need it to point
 
 public class CompassActivity extends AppCompatActivity {
 
@@ -31,15 +37,14 @@ public class CompassActivity extends AppCompatActivity {
 
     private Location myLoc;
     private Location destLoc = new Location(GPS_PROVIDER);
-    private float direction;
-
     private Gson trailGson = new Gson();
-    Trail trail = new Trail();
 
-    //String json = trailGson.fromJson(json, );
+    Trail trail;  // = trailGson.fromJson("values/trail.json", Trail.class);
 
     private double distance;
-    private double closeEnough = 1.5;
+    private float direction;
+    private double closeEnough = .0002;
+    private int index = 0;
     private Compass compass;
     private ImageView arrowView;
     private TextView sotwLabel;  // SOTW is for "side of the world"
@@ -52,9 +57,25 @@ public class CompassActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        // read our trail from the json
+        Scanner sc = new Scanner(System.in);
+        try {
+            sc = new Scanner(new File(this.getFilesDir()+"/trail.json"));
+        } catch (FileNotFoundException e) {
+            Log.d(TAG, "you're not opening the file right!!!");
+        }
+        String trailjson = "";
+        while(sc.hasNextLine())
+            trailjson += sc.nextLine();
+        sc.close();
+
+        // load it into a trail object
+        trail = trailGson.fromJson(trailjson, Trail.class);
+
+        //location setup
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        destLoc.setLatitude(40.596968);
-        destLoc.setLongitude(-75.510654);
+        destLoc = trail.getNode(index).location;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compass);
 
@@ -63,6 +84,8 @@ public class CompassActivity extends AppCompatActivity {
         arrowView = findViewById(R.id.main_image_hands);
         locLabel = findViewById(R.id.sotw_label2);
         locLabel.setText("nothing yet!");
+
+        //permission check
         ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
         if ( ContextCompat.checkSelfPermission( this, android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
             ActivityCompat.requestPermissions( this, new String[] {  android.Manifest.permission.ACCESS_FINE_LOCATION  }, 1);
@@ -120,28 +143,27 @@ public class CompassActivity extends AppCompatActivity {
         arrowView.startAnimation(an);
     }
 
-
-
+    //this is the main one we modified
     private Compass.CompassListener getCompassListener() {
         return new Compass.CompassListener() {
             @Override
             public void onNewAzimuth(final float azimuth) {
                 if (myLoc == null){return;}
-                trailNorth = azimuth;
+                trailNorth = azimuth; //bear with us
                 GeomagneticField geoField = new GeomagneticField( Double.valueOf(myLoc.getLatitude()).floatValue(),     // ignore this
                         Double.valueOf(myLoc.getLongitude()).floatValue(), Double.valueOf(myLoc.getAltitude()).floatValue(),
                         System.currentTimeMillis());
                 trailNorth -= geoField.getDeclination(); //true north
 
-                float bearTo = myLoc.bearingTo(destLoc);
-                if (bearTo < 0){
+                float bearTo = myLoc.bearingTo(destLoc); //the direction the coordinates are in
+                if (bearTo < 0){ //keep it angles in the unit circle
                     bearTo = bearTo + 360;
                 }
-                direction = bearTo-trailNorth + 90; //put back as what it was
+                direction = bearTo-trailNorth + 90; //this should work but it didn't so we added 90 degrees now it works
                 if (direction < 0){
                     direction = direction + 360;
                 }
-                final float irlDirection = direction;
+                final float irlDirection = direction; //change the typing to the one required for adjustarrow
 
                 // UI updates only in UI thread
                 // https://stackoverflow.com/q/11140285/444966
@@ -166,6 +188,8 @@ public class CompassActivity extends AppCompatActivity {
             locLabel.setText(""+distance);
             if (distance < closeEnough) {
                 //locLabel.setText("you made it!");
+                index += 1;
+                destLoc = trail.getNode(index).location;
             }
         }
 
